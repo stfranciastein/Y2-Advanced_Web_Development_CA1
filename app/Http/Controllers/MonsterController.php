@@ -12,7 +12,8 @@ class MonsterController extends Controller
      */
     public function index()
     {
-        //
+        $monsters = Monster::all();
+        return view('monsters.index', compact('monsters'));
     }
 
     /**
