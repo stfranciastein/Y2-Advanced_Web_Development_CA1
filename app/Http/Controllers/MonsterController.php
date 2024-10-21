@@ -37,7 +37,7 @@ class MonsterController extends Controller
      */
     public function show(Monster $monster)
     {
-        //
+        return view('monsters.show')->with('monster', $monster);
     }
 
     /**
