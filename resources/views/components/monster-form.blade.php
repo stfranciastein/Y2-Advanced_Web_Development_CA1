@@ -19,6 +19,7 @@
             <p class="text-sm text-red-600">{{ $message }}</p>
         @enderror
     </div>
+    <!-- In value, you need to have a fallback blank after ?? i.e. '' Otherwise it will ERROR -->
     
     <div class="mb-4">
         <label for="alignment" class="block text-sm text-gray-700">Alignment</label>
