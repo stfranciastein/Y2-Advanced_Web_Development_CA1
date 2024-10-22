@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('monsters.index')" :active="request()->routeIs('monsters.index')">
                         {{ __('View All Monsters') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('monsters.create')" :active="request()->routeIs('monsters.create')">
+                        {{ __('Add Monster') }}
+                    </x-nav-link>
                 </div>
             </div>
 

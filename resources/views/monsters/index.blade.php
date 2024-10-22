@@ -4,7 +4,9 @@
             {{ _('All Monsters') }}
         </h2>
     </x-slot>
-
+    <x-alert-success>
+        {{ session('success') }}
+    </x-alert-sucess>
     <div class="py-12">
         <div class="max-w-7x1 mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Monster;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MonsterController extends Controller
 {
@@ -21,7 +22,7 @@ class MonsterController extends Controller
      */
     public function create()
     {
-        //
+        return view('monsters.create');
     }
 
     /**
@@ -29,7 +30,32 @@ class MonsterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validates Input
+        $request-validate([
+            'monster_name' => 'required',
+            'alignment' => 'required',
+            'challenge_rating' => 'required|interger',
+            'armour_class' => 'required|interger',
+            'image_url' => 'required',
+        ]);
+
+        if ($request->hasFile('image')) {
+
+            $imageName = time(). '.' .$request-image->extension();
+            $request->image->move(public_path('image/monsters'), $imageName);
+        }
+
+        Monster::create([
+            'monster_name' => $request->monster_name,
+            'alignment' => $request->alignment,
+            'challenge_rating' => $request->challenge_rating,
+            'armour_class' => $request->armour_class,
+            'image_url' => $imageName,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        return to_route('monsters.index')->with('success', 'Monster added successfully!');
     }
 
     /**
