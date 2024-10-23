@@ -15,8 +15,8 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             backgroundImage: {
-                'backgroundpaper':"url('/images/background.jpg')",
-            }
+                'backgroundpaper': "url('https://img.freepik.com/premium-photo/paper-texture-seamless-square-texture_463999-4366.jpg?w=740')",
+            },            
         },
     },
 
