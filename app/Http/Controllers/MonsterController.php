@@ -30,33 +30,42 @@ class MonsterController extends Controller
      */
     public function store(Request $request)
     {
-        //Validates Input
-        $request-validate([
+        // Validates Input
+        $request->validate([
             'monster_name' => 'required',
             'alignment' => 'required',
-            'challenge_rating' => 'required|interger',
-            'armour_class' => 'required|interger',
-            'image_url' => 'required',
+            'challenge_rating' => 'required|integer',
+            'armour_class' => 'required|integer',
+            'image_url' => 'required|image',
         ]);
+    
+        $camelName = str_replace(' ', '', ucwords($request->monster_name));
 
-        if ($request->hasFile('image')) {
-
-            $imageName = time(). '.' .$request-image->extension();
-            $request->image->move(public_path('image/monsters'), $imageName);
+        if ($request->hasFile('image_url')) {
+            // Get the extension of the uploaded image
+            $extension = $request->file('image_url')->extension();
+            $imageName = "{$camelName}.{$extension}";
+            
+            // Move the uploaded file to the desired path
+            $request->file('image_url')->move(public_path('images/monsters'), $imageName);
+        } else {
+            $imageName = null;
         }
-
+    
         Monster::create([
             'monster_name' => $request->monster_name,
             'alignment' => $request->alignment,
             'challenge_rating' => $request->challenge_rating,
             'armour_class' => $request->armour_class,
+            'description' => $request->description,
             'image_url' => $imageName,
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
-
+    
         return to_route('monsters.index')->with('success', 'Monster added successfully!');
     }
+    
 
     /**
      * Display the specified resource.
@@ -71,7 +80,7 @@ class MonsterController extends Controller
      */
     public function edit(Monster $monster)
     {
-        //
+        return view('monsters.edit', compact('monster'));
     }
 
     /**
@@ -79,7 +88,18 @@ class MonsterController extends Controller
      */
     public function update(Request $request, Monster $monster)
     {
-        //
+        // Validate the incoming request data
+        $request->validate([
+            'monster_name' => 'required|string|max:255',
+            'alignment' => 'required|string|max:255',
+            'challenge_rating' => 'required|integer',
+            'armour_class' => 'required|integer',
+            'image_url' => 'sometimes|image', // Use 'sometimes' if the image isn't required to be updated
+        ]);
+    
+        $monster->update($request->all());
+
+        return redirect()->route('monsters.index')->with('success', 'Monster updated successfully!');
     }
 
     /**
@@ -87,6 +107,11 @@ class MonsterController extends Controller
      */
     public function destroy(Monster $monster)
     {
-        //
+        // This part of the code will check if the row in the database contains an image. If it does, it also deletes that image.
+        if ($monster->image_url && file_exists(public_path($monster->image_url))) {
+            unlink(public_path($monster->image_url));
+        }
+        $monster->delete();
+        return redirect()->route('monsters.index')->with('success', 'Monster deleted successfully!');
     }
 }

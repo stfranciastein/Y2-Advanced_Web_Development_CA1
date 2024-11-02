@@ -1,4 +1,4 @@
-@props(['action', 'method'])
+@props(['action', 'method', 'monster' => null]) <!-- Add monster prop -->
 
 <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
     @csrf
@@ -19,7 +19,6 @@
             <p class="text-sm text-red-600">{{ $message }}</p>
         @enderror
     </div>
-    <!-- In value, you need to have a fallback blank after ?? i.e. '' Otherwise it will ERROR -->
     
     <div class="mb-4">
         <label for="alignment" class="block text-sm text-gray-700">Alignment</label>
@@ -76,21 +75,7 @@
             <p class="text-sm text-red-600">{{ $message }}</p>
         @enderror
     </div>
-
-    <div class="mb-4">
-        <label for="created_at" class="block text-sm text-gray-700">Created At</label>
-        <input
-            type="text"
-            name="created_at"
-            id="created_at"
-            value="{{ old('created_at', $monster->created_at ?? '') }}" 
-            required
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
-        @error('created_at')
-            <p class="text-sm text-red-600">{{ $message }}</p>
-        @enderror
-    </div>
-
+    
     <div class="mb-4">
         <label for="image_url" class="block text-sm font-medium text-gray-700">Image</label>
         <input
@@ -110,11 +95,9 @@
         </div>
     @endisset
 
-
-
     <div>
         <x-primary-button>
-            {{ isset($monster) ? 'Update Monster' : 'Add Monster' }}
+            {{ isset($monster) ? 'Update Monster' : 'Add Monster' }} <!-- Update button text based on context -->
         </x-primary-button>
     </div>
 </form>

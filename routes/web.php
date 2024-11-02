@@ -22,7 +22,10 @@ Route::middleware('auth')->group(function () {
     // Routes for the CRUD functionality of monsters   
     Route::get('/monsters/create', [MonsterController::class, 'create'])->name('monsters.create');
     Route::get('/monsters/{monster}', [MonsterController::class, 'show'])->name('monsters.show');
-    Route::post('/monsters', [MonsterController::class, 'store'])->name('monsters.store');    
+    Route::post('/monsters', [MonsterController::class, 'store'])->name('monsters.store');
+    Route::get('/monsters/{monster}/edit', [MonsterController::class, 'edit'])->name('monsters.edit');
+    Route::patch('/monsters/{monster}', [MonsterController::class, 'update'])->name('monsters.update');
+    Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy');       
 });
 
 require __DIR__.'/auth.php';
