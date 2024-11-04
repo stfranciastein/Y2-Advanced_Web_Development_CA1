@@ -8,6 +8,7 @@
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-white" />
                     </a>
+                    <p>Santiago's Saucey </p>
                 </div>
 
                 <!-- Navigation Links -->

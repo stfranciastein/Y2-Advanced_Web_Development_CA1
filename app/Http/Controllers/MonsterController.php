@@ -39,14 +39,8 @@ class MonsterController extends Controller
             'image_url' => 'required|image',
         ]);
     
-        $camelName = str_replace(' ', '', ucwords($request->monster_name));
-
         if ($request->hasFile('image_url')) {
-            // Get the extension of the uploaded image
-            $extension = $request->file('image_url')->extension();
-            $imageName = "{$camelName}.{$extension}";
-            
-            // Move the uploaded file to the desired path
+            $imageName = time() . '.' . $request->file('image_url')->extension();
             $request->file('image_url')->move(public_path('images/monsters'), $imageName);
         } else {
             $imageName = null;
@@ -97,10 +91,25 @@ class MonsterController extends Controller
             'image_url' => 'sometimes|image', // Use 'sometimes' if the image isn't required to be updated
         ]);
     
-        $monster->update($request->all());
-
+        //Hi Matthew, here's the edited stuff.
+        $data = $request->only(['monster_name', 'alignment', 'challenge_rating', 'armour_class']);
+        
+        if ($request->hasFile('image_url')) {
+            if ($monster->image_url && file_exists(public_path($monster->image_url))) {
+                unlink(public_path($monster->image_url));
+            }
+            
+            // Store new image and update image path
+            $imageName = time() . '.' . $request->file('image_url')->extension();
+            $request->file('image_url')->move(public_path('images/monsters'), $imageName);
+            $data['image_url'] = $imageName; // Add image path to the data array
+        }
+    
+        $monster->update($data); 
+    
         return redirect()->route('monsters.index')->with('success', 'Monster updated successfully!');
     }
+    
 
     /**
      * Remove the specified resource from storage.

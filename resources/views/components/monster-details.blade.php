@@ -1,9 +1,20 @@
 @props(['monster_name', 'alignment', 'challenge_rating', 'armour_class', 'image_url', 'description', 'created_at', 'updated_at'])
 
-<div class="border rounded-lg shadow-md p-6 bg-white hover:shadow-lg transition duration-300 max-w-xl mx-auto"> 
-    <img src="{{ asset('images/monsters/' . $image_url) }}" alt="{{ $monster_name }}" class="w-200 max w-xs h-auto object-cover">
-    <h1 class="font-bold text-black-600 mb-2" style="font-size: 3rem;">{{ $monster_name }}
+<div class="lg:flex">
+    <div class="flex-1 rounded-lg p-6 bg-white transition duration-300 mx-auto"> 
+        <img src="{{ asset('images/monsters/' . $image_url) }}" alt="{{ $monster_name }}" class="w-full h-full object-cover">
+    </div>
+    <div class="flex-1 border rounded-lg p-6 bg-white transition duration-300 mx-auto">
+        <h1 class="font-bold text-black-600 mb-2 text-5xl uppercase">{{ $monster_name }}</h1>
+        <hr class="py-1">
+        <ul class="space-y-2">
+            <li><span class="font-semibold">Alignment:</span> {{ $alignment }}</li>
+            <li><span class="font-semibold">Challenge Rating:</span> {{ $challenge_rating }}</li>
+            <li><span class="font-semibold">Armour Class:</span> {{ $armour_class }}</li>
+            <li><span class="font-semibold">Description:</span> {{ $description }}</li>
+            <li><hr></li>
+            <li><p>Stats here (Placeholder)</p></li>
+            <li><hr></li>
+        </ul>
+    </div>
 </div>
-
-
-Your 
