@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 monster.getAttribute('data-alignment') === selectedAlignment
             );
             updateMonsterList(filteredMonsters);
+        if (selectedAlignment = showingAll);
         } else {
             resetSort();
         }

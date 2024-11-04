@@ -15,6 +15,7 @@
             <li><hr></li>
             <li><p>Stats here (Placeholder)</p></li>
             <li><hr></li>
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/50ZenUP4O2Q5eCy2NRNvuz?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </ul>
     </div>
 </div>

@@ -31,7 +31,7 @@
                             <!-- Alignment Filter -->
                             <div class="mb-4">
                             <select name="alignment_filter" id="alignment-filter">
-                                <option value="">Select Alignment</option>
+                                <option value="showingAll">Show All</option>
                                 @foreach($alignments as $alignment)
                                     <option value="{{ $alignment }}">{{ $alignment }}</option>
                                 @endforeach

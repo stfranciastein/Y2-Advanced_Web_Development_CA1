@@ -18,7 +18,7 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50-">
         <!-- Video Background on a loop -->
-        <video autoplay loop muted playsinline class="absolute top-0 left-0 w-screen h-screen object-cover z-0">
+        <video autoplay loop muted playsinline class="absolute top-0 left-0 w-screen h-screen object-fit z-0">
             <source src="{{ asset('videos/background/splash.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
