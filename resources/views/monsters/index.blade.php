@@ -68,5 +68,4 @@
     </div>
 
     @vite('resources/js/filter.js')
-
 </x-app-layout>
