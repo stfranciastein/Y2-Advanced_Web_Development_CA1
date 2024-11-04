@@ -28,12 +28,26 @@
                                     Z-A
                                 </label>
                             </div>
+                            <!-- Alignment Filter -->
+                            <div class="mb-4">
+                            <select name="alignment_filter" id="alignment-filter">
+                                <option value="">Select Alignment</option>
+                                @foreach($alignments as $alignment)
+                                    <option value="{{ $alignment }}">{{ $alignment }}</option>
+                                @endforeach
+                            </select>
+                            </div>
+                            <!-- Search Bar -->
+                            <div class="mb-4">
+                                <input type="text" id="search-bar" placeholder="Search Monsters" class="border rounded px-4 py-2 w-full" />
+                            </div>
+
                         </div>
 
 
                         <div id="monster-list" class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                             @foreach($monsters as $monster)
-                                <div class="monster-item" data-name="{{ $monster->monster_name }}">
+                                <div class="monster-item" data-name="{{ $monster->monster_name }}" data-alignment="{{ $monster->alignment }}">
                                     <a href="{{ route('monsters.show', $monster) }}">
                                         <x-monster-card
                                             :monster_name="$monster->monster_name"

@@ -1,18 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const monsterList = document.getElementById('monster-list');
     const originalMonsters = Array.from(monsterList.children);
-    const monsterAlignments = [];
-
-    // const uniqueAlignments = [];
-
-    // monsters.forEach(monster => {
-    //     monster.alignments.forEach(alignment => {
-    //         if (!uniqueAlignments.includes(alignment)) {
-    //             uniqueAlignments.push(alignment);
-    //         }
-    //     });
-    // });
-    // THIS DOES NOTHING SO FAR< I HAD TO UNDO MY SEARCH BAR TO ADD FILTERS.
 
     // Sort A-Z
     document.getElementById('sort-az-toggle').addEventListener('change', function() {
@@ -33,6 +21,30 @@ document.addEventListener('DOMContentLoaded', function() {
             resetSort();
         }
     });
+
+    // Filter by Alignment
+    document.getElementById('alignment-filter').addEventListener('change', function() {
+        const selectedAlignment = this.value;
+        if (selectedAlignment) {
+            const filteredMonsters = originalMonsters.filter(monster => 
+                monster.getAttribute('data-alignment') === selectedAlignment
+            );
+            updateMonsterList(filteredMonsters);
+        } else {
+            resetSort();
+        }
+    });
+
+    // Search Bar
+    document.getElementById('search-bar').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const filteredMonsters = originalMonsters.filter(monster => {
+            const monsterName = monster.getAttribute('data-name').toLowerCase();
+            return monsterName.includes(searchTerm);
+        });
+        updateMonsterList(filteredMonsters);
+    });
+    
 
     function sortMonsters(ascending) {
         const monsters = Array.from(monsterList.children);
