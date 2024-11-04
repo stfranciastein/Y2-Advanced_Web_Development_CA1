@@ -14,6 +14,7 @@
                     <div class="p-6 text-gray-900">
                         <h3 class="font-semibold text-lg mb-4">List of Monsters:</h3>
                         <div class="font-medium flex items-center gap-2">
+                            <!-- <p>Filter</p> -->
                             <!-- Sorting Buttons -->
                             <div class="mb-4">
                                 <input type="checkbox" id="sort-az-toggle" class="hidden">
