@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('favourite_monster_user', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Link to users table
+            $table->foreignId('monster_id')->constrained()->onDelete('cascade'); // Link to monsters table
             $table->timestamps();
         });
     }
