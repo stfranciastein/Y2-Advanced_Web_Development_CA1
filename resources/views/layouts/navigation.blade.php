@@ -1,35 +1,37 @@
-<nav x-data="{ open: false }" class="bg-slate-900 border-b border-rose-500">
+<nav x-data="{ open: false }" class="bg-neutral-900 border-b-2 border-rose-500 sticky top-0 z-50">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ url('/') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-white" />
                     </a>
-                    <p>Santiago's Saucey </p>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white hover:text-rose-500">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white hover:text-rose-500 border-b-0 {{ request()->routeIs('dashboard') ? 'text-rose-500' : '' }}">
+                        {{ __('Home') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('monsters.index')" :active="request()->routeIs('monsters.index')" class="text-white hover:text-rose-500">
+
+                    <x-nav-link :href="route('monsters.index')" :active="request()->routeIs('monsters.index')" class="text-white hover:text-rose-500 border-b-0 {{ request()->routeIs('monsters.index') ? 'text-rose-500' : '' }}">
                         {{ __('View All Monsters') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('monsters.create')" :active="request()->routeIs('monsters.create')" class="text-white hover:text-rose-500">
+
+                    <x-nav-link :href="route('monsters.create')" :active="request()->routeIs('monsters.create')" class="text-white hover:text-rose-500 border-b-0 {{ request()->routeIs('monsters.create') ? 'text-rose-500' : '' }}">
                         {{ __('Add Monster') }}
                     </x-nav-link>
                 </div>
-            </div>
+
+            </div> <!--End of Flex-->
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-slate-900 hover:text-rose-500 hover:bg-slate-950 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-neutral-900 hover:text-rose-500 hover:bg-neutral-900 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -61,7 +63,7 @@
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-rose-500 hover:bg-slate-800 focus:outline-none focus:bg-slate-950 focus:text-rose-500 transition duration-150 ease-in-out">
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-rose-500 hover:bg-neutral-800 focus:outline-none focus:bg-neutral-900 focus:text-rose-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

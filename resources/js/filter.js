@@ -1,72 +1,46 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const monsterList = document.getElementById('monster-list');
-    const originalMonsters = Array.from(monsterList.children);
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('search-bar');
+    const searchResults = document.getElementById('search-results');
+    const monsterItems = document.getElementsByClassName('monster-item');
 
-    // Sort A-Z
-    document.getElementById('sort-az-toggle').addEventListener('change', function() {
-        if (this.checked) {
-            document.getElementById('sort-za-toggle').checked = false;
-            sortMonsters(true);
+    // Filter monster names as you type in the search bar
+    searchInput.addEventListener('input', function () {
+        const query = searchInput.value.toLowerCase();
+
+        // Clear previous results
+        searchResults.innerHTML = '';
+
+        // If search query is empty, hide the results dropdown
+        if (query === '') {
+            searchResults.classList.add('hidden');
+            return;
+        }
+
+        // Find monsters that match the search query
+        let matchesFound = false;
+        for (let item of monsterItems) {
+            const monsterName = item.getAttribute('data-name').toLowerCase();
+
+            // If the monster name matches, show it in the dropdown
+            if (monsterName.includes(query)) {
+                matchesFound = true;
+                const listItem = document.createElement('li');
+                listItem.classList.add('px-4', 'py-2', 'cursor-pointer');
+                listItem.textContent = item.getAttribute('data-name');
+                listItem.addEventListener('click', function () {
+                    searchInput.value = item.getAttribute('data-name');
+                    searchResults.innerHTML = '';
+                    searchResults.classList.add('hidden');
+                });
+                searchResults.appendChild(listItem);
+            }
+        }
+
+        // Show the results dropdown if matches are found, otherwise hide it
+        if (matchesFound) {
+            searchResults.classList.remove('hidden');
         } else {
-            resetSort();
+            searchResults.classList.add('hidden');
         }
     });
-
-    // Sort Z-A
-    document.getElementById('sort-za-toggle').addEventListener('change', function() {
-        if (this.checked) {
-            document.getElementById('sort-az-toggle').checked = false;
-            sortMonsters(false);
-        } else {
-            resetSort();
-        }
-    });
-
-    // Filter by Alignment
-    document.getElementById('alignment-filter').addEventListener('change', function() {
-        const selectedAlignment = this.value;
-        if (selectedAlignment) {
-            const filteredMonsters = originalMonsters.filter(monster => 
-                monster.getAttribute('data-alignment') === selectedAlignment
-            );
-            updateMonsterList(filteredMonsters);
-        if (selectedAlignment = showingAll);
-        } else {
-            resetSort();
-        }
-    });
-
-    // Search Bar
-    document.getElementById('search-bar').addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-        const filteredMonsters = originalMonsters.filter(monster => {
-            const monsterName = monster.getAttribute('data-name').toLowerCase();
-            return monsterName.includes(searchTerm);
-        });
-        updateMonsterList(filteredMonsters);
-    });
-    
-
-    function sortMonsters(ascending) {
-        const monsters = Array.from(monsterList.children);
-        monsters.sort((a, b) => {
-            const nameA = a.getAttribute('data-name').toLowerCase();
-            const nameB = b.getAttribute('data-name').toLowerCase();
-            return ascending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
-        });
-        updateMonsterList(monsters);
-    }
-
-    function updateMonsterList(monsters) {
-        monsterList.innerHTML = '';
-        monsters.forEach(monster => {
-            monsterList.appendChild(monster);
-        });
-    }
-
-    function resetSort() {
-        updateMonsterList(originalMonsters);
-        document.getElementById('sort-az-toggle').checked = false;
-        document.getElementById('sort-za-toggle').checked = false;
-    }
 });

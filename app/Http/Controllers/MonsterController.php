@@ -11,14 +11,49 @@ class MonsterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, $dashboard = false)
     {
-        $monsters = Monster::all();
-        
+        $query = Monster::query();
+        $recentMonster = Monster::latest()->first(); //For dashboard.blade recent display
+    
+        // Filtering by alignment
+        if ($request->has('alignment_filter') && $request->alignment_filter != 'showingAll') {
+            $query->where('alignment', $request->alignment_filter);
+        }
+    
+        // Searching by monster name
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('monster_name', 'like', '%' . $request->search . '%');
+        }
 
+        if ($dashboard) {
+            $query->orderBy('monster_name', 'asc'); // Alphabetical sorting only for dashboard
+        } elseif ($request->has('sort') && $request->sort == 'az') {
+            $query->orderBy('monster_name', 'asc');
+        } elseif ($request->has('sort') && $request->sort == 'za') {
+            $query->orderBy('monster_name', 'desc');
+        }
+    
+        // Sorting
+        if ($request->has('sort') && $request->sort == 'az') {
+            $query->orderBy('monster_name', 'asc');
+        } elseif ($request->has('sort') && $request->sort == 'za') {
+            $query->orderBy('monster_name', 'desc');
+        }
+    
+        // Get the monsters based on the filtering and sorting
+        $monsters = $query->get();
+    
+        // Fetch all distinct alignments for the filter dropdown
         $alignments = Monster::distinct('alignment')->pluck('alignment');
-        return view('monsters.index', compact('monsters', 'alignments'));
-    }
+    
+        // Check if the request is for the dashboard
+        if ($dashboard) {
+            return view('dashboard', compact('monsters', 'alignments', 'recentMonster'));
+        }
+    
+        return view('monsters.index', compact('monsters', 'alignments', 'recentMonster'));
+    }    
 
     /**
      * Show the form for creating a new resource.
