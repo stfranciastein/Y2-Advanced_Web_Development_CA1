@@ -24,32 +24,78 @@
             <source src="{{ asset('videos/background/splash.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+        <div class="bg-gray-50 text-black/50">
             <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                 <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl"> 
-                    <main class="mt-6">
 
-                    <div class="bg-white">
-                                        <ul>
-                                            @if (Route::has('login'))
-                                                    @auth
-                                                        <a href="{{ url('/dashboard') }}" class="bg-rose-500"> Dashboard </a>
-                                                    @else
-                                                        <a href="{{ route('login') }}" class="bg-rose-500"> Log in </a>
-                    
-                                                        @if (Route::has('register'))
-                                                            <a href="{{ route('register') }}" class="bg-white"> Register </a>
-                                                        @endif
-                                                    @endauth
-                                            @endif
-                                        </ul>
-</div>
+                    <main>
+                        <div class="container grid md:grid-cols-2 gap-20">
+                            <div class="flex items-center justify-center text-4xl uppercase font-black text-white">
+                                <img src="{{ asset('images/icon.png') }}" alt="book icon" class="">
+                                <h1>Santiago's Monster Manual</h1>
+                            </div>
 
+                            <div class="bg-white rounded px-12 py-10">
+                                <h2 class="text-4xl text-gray-800 font-bold">Sign In</h2>
+                                <ul class="py-2 mb-3">
+                                    <li class="text-gray-500 text-md"> New user? <a href="{{ route('register') }}" class="text-blue-500 font-bold"> Register an account</a></li>
+                                </ul>
+                                <!-- User entry buttons -->
+                                <div class="text-center text-xl pb-5">
+                                    <div class="text-white bg-slate-900 hover:bg-slate-800 p-2 rounded w-full font-medium">
+                                        @if (Route::has('login'))
+                                            @auth
+                                            <a href="{{ url('/dashboard') }}"><p> Dashboard </p></a>
+                                            @else
+                                            <a href="{{ route('login') }}"><p   > Log in </p></a>
+                                            @endauth
+                                        @endif
+                                    </div>
+                                
+                                    <p class="py-3 text-sm font-bold">OR</p>
+                                    
+                                    <a href="#">
+                                        <p class="flex items-center justify-center text-black bg-gray-100 hover:bg-gray-200 p-2 mb-1 rounded w-full font-medium">
+                                            <!-- Google SVG Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 48 48">
+                                                <path fill="#EA4335" d="M24 9.5c3.6 0 6.8 1.3 9.3 3.6l6.9-6.9C34.3 2.2 29.5 0 24 0 14.5 0 6.4 5.8 2.6 14.2l8 6.2C13.1 14.6 18 9.5 24 9.5z"/>
+                                                <path fill="#4285F4" d="M46.5 24c0-1.5-.1-3-.4-4.4H24v8.4h12.8c-1.1 4.2-4 7.7-8.3 9.5l7.5 5.8c6-5.5 9.5-13.5 9.5-22.3z"/>
+                                                <path fill="#FBBC05" d="M12.8 28.4c-1-3.1-1-6.3 0-9.4l-8-6.2C2.6 17.6 0 21.6 0 24c0 2.4.6 4.8 1.6 6.9l8.2-6.5z"/>
+                                                <path fill="#34A853" d="M24 48c6.5 0 12-2.1 16.3-5.8l-7.5-5.8c-2.4 1.6-5.4 2.5-8.8 2.5-6 0-11.1-4-12.9-9.5l-8.2 6.5C6.4 42.3 14.5 48 24 48z"/>
+                                            </svg>
+                                            Continue with Google
+                                        </p>
+                                    </a>
+
+                                    <a href="#">
+                                        <p class="flex items-center justify-center text-black bg-gray-100 hover:bg-gray-200 p-2 mb-1 rounded w-full font-medium">
+                                            <!-- Apple SVG Icon (Chat generated)-->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M16.365 1.43c-.848.388-1.828.968-2.375 1.667-.516.656-.956 1.58-.785 2.507 1.01.056 2.056-.564 2.64-1.297.576-.728.978-1.626.784-2.543-.71.043-1.69.468-2.263 1.082zM11.74 6.977c-.75-.046-1.453.191-2.034.555-.597.376-1.058.849-1.456 1.365-.436.563-.823 1.194-1.078 1.858-.272.702-.468 1.416-.507 2.18-.06 1.278.322 2.42.944 3.522.568 1.012 1.282 1.93 2.208 2.595.486.354.964.454 1.602.467.615-.013 1.126-.127 1.615-.474.63-.43 1.154-.982 1.603-1.63.2-.276.376-.572.61-.892.168-.225.392-.51.626-.438.235.07.27.367.376.56.426.792.952 1.524 1.682 2.085.586.466 1.288.724 2.048.743 1.17-.013 2.194-.502 2.995-1.25.51-.482.91-1.066 1.252-1.694.312-.582.587-1.182.676-1.83.046-.315.06-.635.067-.954.007-.318-.017-.635-.063-.95a5.274 5.274 0 0 0-.222-.893c-.214-.592-.548-1.125-1.056-1.53-.46-.37-.988-.617-1.565-.627-.396-.007-.75.078-1.11.247-.648.306-1.143.816-1.498 1.47-.123.22-.262.43-.383.646-.107.19-.17.198-.278.048a3.862 3.862 0 0 0-.515-.66c-.607-.623-1.327-.936-2.183-.938z"/>
+                                            </svg>
+                                            Continue with Apple
+                                        </p>
+                                    </a>
+
+                                    <a href="#">
+                                        <p class="flex items-center justify-center text-black bg-gray-100 hover:bg-gray-200 p-2 mb-1 rounded w-full font-medium">
+                                            <!-- GitHub SVG Icon (Chat generated)-->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 16 16" fill="currentColor">
+                                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.37v-1.37c-2.22.48-2.68-1.07-2.68-1.07-.36-.91-.89-1.15-.89-1.15-.73-.5.06-.49.06-.49.81.06 1.24.86 1.24.86 1.43 2.45 3.73 1.74 4.63 1.32.14-.92.56-1.74 1.02-2.14-1.7-.19-3.47-.85-3.47-3.77 0-.83.3-1.51.79-2.04-.08-.19-.34-.98.06-2.04 0 0 .64-.2 2.09.79.61-.17 1.27-.25 1.91-.25.64 0 1.3.08 1.91.25 1.45-.99 2.09-.79 2.09-.79.4 1.06.14 1.85.06 2.04.49.53.79 1.21.79 2.04 0 2.92-1.77 3.58-3.47 3.77.61.53 1.02 1.26 1.02 2.14v2.09c0 .2.15.44.55.37 3.18-1.06 5.47-4.05 5.47-7.59 0-4.42-3.58-8-8-8z"/>
+                                            </svg>
+                                            Continue with Github
+                                        </p>
+                                    </a>
+
+                                    <a href="https://www.youtube.com/watch?v=SR1CSqQJi3E"><p class="py-3 text-sm text-blue-500 font-bold">View More</p></a>
+
+                                </div>
+                                <p class="pt-2 pb-5 text-center text-sm font-boldtext-black">Made by Joshua Daniel Santiago-Francia in Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
+                                <!--Footer-->
+                            </div>
+                        </div>
                     </main>
- 
-                    <footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                        Made by Joshua Daniel Santiago-Francia in Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                    </footer>
+
                 </div>
             </div>
         </div>
