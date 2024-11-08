@@ -2,6 +2,7 @@
 
 <div class="lg:flex">
     <div class="flex-1 rounded-lg p-6 bg-white transition duration-300 mx-auto"> 
+        <h3 class="font-semibold text-md mb-3">Monsters > {{ $alignment }} > {{ $monster_name }}</h3>
         <img src="{{ asset('images/monsters/' . $image_url) }}" alt="{{ $monster_name }}" class="w-full h-full object-contain">
     </div>
     <div class="flex-1 border rounded-lg p-6 bg-white transition duration-300 mx-auto">
