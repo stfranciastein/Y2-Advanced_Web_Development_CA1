@@ -104,6 +104,7 @@ class MonsterController extends Controller
      */
     public function show(Monster $monster)
     {
+        $monster->loadCount('favouritedBy');
         return view('monsters.show')->with('monster', $monster);
     }
 
@@ -161,4 +162,28 @@ class MonsterController extends Controller
         $monster->delete();
         return redirect()->route('monsters.index')->with('success', 'Monster deleted successfully!');
     }
+
+    public function favourite($monsterId)
+    {
+        $monster = Monster::findOrFail($monsterId);
+        $user = auth()->user();
+
+        if ($user->favouriteMonsters->contains($monsterId)) {
+            // If the monster is already favourited, unfavourite it
+            $user->favouriteMonsters()->detach($monsterId);
+        } else {
+            // If the monster isn't favourited, favourite it
+            $user->favouriteMonsters()->attach($monsterId);
+        }
+
+        return redirect()->back(); // Redirect back to the previous page
+    }
+
+    public function favourites()
+    {
+        $favouriteMonsters = auth()->user()->favouriteMonsters;
+        return view('monsters.favourites', compact('favouriteMonsters'));
+    }
+
+
 }

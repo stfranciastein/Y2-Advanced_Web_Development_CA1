@@ -47,7 +47,7 @@
                         </div>
 
                         <!-- Monster List -->
-                        <div id="monster-list" class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div id="monster-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                             @foreach($monsters as $monster)
                                 <div class="monster-item" data-name="{{ $monster->monster_name }}" data-alignment="{{ $monster->alignment }}">
                                     <a href="{{ route('monsters.show', $monster) }}">

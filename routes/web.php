@@ -26,7 +26,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/monsters', [MonsterController::class, 'store'])->name('monsters.store');
     Route::get('/monsters/{monster}/edit', [MonsterController::class, 'edit'])->name('monsters.edit');
     Route::patch('/monsters/{monster}', [MonsterController::class, 'update'])->name('monsters.update');
-    Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy');       
+    Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy');
+    // Routes for favourites
+    Route::post('/monsters/{monster}/favourite', [MonsterController::class, 'favourite'])->name('monsters.favourite');
+    Route::get('/favourites', [MonsterController::class, 'favourites'])->name('monsters.favourites');
+
+
 });
 
 require __DIR__.'/auth.php';

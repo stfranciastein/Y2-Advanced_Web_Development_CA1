@@ -20,9 +20,14 @@
                         {{ __('View All Monsters') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('monsters.create')" :active="request()->routeIs('monsters.create')" class="text-white hover:text-rose-500 border-b-0 {{ request()->routeIs('monsters.create') ? 'text-rose-500' : '' }}">
-                        {{ __('Add Monster') }}
+                    <x-nav-link :href="route('monsters.favourites')" :active="request()->routeIs('monsters.favourites')" class="text-white hover:text-rose-500 border-b-0 {{ request()->routeIs('monsters.favourites') ? 'text-rose-500' : '' }}">
+                        {{ __('Favourites') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('monsters.create')" :active="request()->routeIs('monsters.create')" class="text-white hover:text-rose-500 border-b-0 {{ request()->routeIs('monsters.create') ? 'text-rose-500' : '' }}">
+                        {{ __('Add Entry') }}
+                    </x-nav-link>
+
                 </div>
 
             </div> <!--End of Flex-->

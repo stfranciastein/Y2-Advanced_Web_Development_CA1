@@ -19,4 +19,10 @@ class Monster extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function favouritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favourite_monster_user');
+    }
+
 }

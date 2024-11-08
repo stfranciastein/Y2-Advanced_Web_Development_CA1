@@ -15,6 +15,7 @@
                                 :created_at="$monster->created_at"
                                 :updated_at="$monster->updated_at"
                                 :monster_id="$monster->id"
+                                :favourited_by_users_count="$monster->favourited_by_count"
                             />
                     </div>
                 </div>

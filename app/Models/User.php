@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function favouriteMonsters()
+    {
+        return $this->belongsToMany(Monster::class, 'favourite_monster_user');
+    }    
 }

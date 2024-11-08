@@ -4,7 +4,7 @@
     <div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm p-5">
-                <h2 class="font-bold text-2xl lg:pb-3 md:pb-4 pb-5 border-b-2 border-rose-500 mb-3">Monsters</h2>
+                <h2 class="font-bold text-2xl lg:pb-3 md:pb-4 pb-5 border-b-2 border-rose-500 mb-3">About</h2>
                 <div>
                     <p class="lg:pb-3 md:pb-4 pb-5">Welcome to the Ultimate Monster Manual—a comprehensive and interactive compendium designed to bring a world of fantasy creatures to life. This manual is crafted for adventurers, dungeon masters, storytellers, and any fantasy enthusiast seeking rich, diverse, and unforgettable creatures to enhance their campaigns or dive deeper into the lore of these extraordinary beings.</p>
                     <p class="lg:pb-3 md:pb-4 pb-5">The Monster Manual is your gateway to discovering creatures of every shape, size, and temperament. From ancient dragons that dwell in deep caves and hoard unimaginable riches, to the cunning tricksters hiding in shadowy forests, this manual spans the full spectrum of magical life forms. You’ll encounter creatures that guard ancient secrets, monsters that seek nothing but destruction, and misunderstood beings that may even be persuaded to aid your heroes. Whether you're looking to find terrifying enemies, powerful allies, or curious creatures to flesh out the world, this manual serves as a rich resource for expanding your understanding and appreciation of these beings.</p>
