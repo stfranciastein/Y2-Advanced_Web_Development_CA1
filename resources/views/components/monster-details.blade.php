@@ -21,7 +21,7 @@
                 @method('DELETE')
                 <button type="submit" class="bg-red-500 text-white uppercase text-sm py-2 px-4 rounded-md hover:bg-red-600 transition duration-200">Delete</button>
             </form>
-            <div class="text-white bg-rose-500 text-sm rounded hover:bg-rose-600"
+            <div class="text-white bg-rose-500 text-sm rounded hover:bg-rose-600">
                 <form action="{{ route('monsters.favourite', $monster_id) }}" method="POST">
                     @csrf
                     @if(auth()->user()->favouriteMonsters->contains($monster_id))
