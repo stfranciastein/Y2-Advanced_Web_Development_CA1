@@ -14,7 +14,7 @@ class MonsterController extends Controller
     public function index(Request $request, $dashboard = false)
     {
         $query = Monster::query();
-        $recentMonster = Monster::latest()->first(); //For dashboard.blade recent display
+        $recentMonster = Monster::latest('updated_at')->first(); //For dashboard.blade recent display
     
         // Filtering by alignment
         if ($request->has('alignment_filter') && $request->alignment_filter != 'showingAll') {

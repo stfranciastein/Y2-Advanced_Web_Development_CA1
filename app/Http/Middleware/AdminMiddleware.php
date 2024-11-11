@@ -15,7 +15,8 @@ class AdminMiddleware
             return $next($request);
         }
 
-        // Redirect if the user is not an admin
+        //  Redirect if the user is not an admin
+        //  Temporary fix while I figure out flash messages in laravel
         return redirect('/');
     }
 }
