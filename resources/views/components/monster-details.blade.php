@@ -1,9 +1,9 @@
 @props(['monster_name', 'alignment', 'challenge_rating', 'armour_class', 'image_url', 'description', 'created_at', 'updated_at', 'monster_id', 'favourited_by_users_count'])
 
 <div class="lg:flex">
-    <div class="flex-1 rounded-lg p-6 bg-white transition duration-300 mx-auto"> 
+    <div class="flex-1 rounded-lg p-6 bg-white transition duration-300 mx-auto sticky top-0"> 
         <h3 class="font-semibold text-md mb-3">Monsters > {{ $alignment }} > {{ $monster_name }}</h3>
-        <img src="{{ asset('images/monsters/' . $image_url) }}" alt="{{ $monster_name }}" class="w-full h-full object-contain">
+        <img src="{{ asset('images/monsters/' . $image_url) }}" alt="{{ $monster_name }}" class="w-full h-100 object-contain">
     </div>
     <div class="flex-1 border p-6 bg-white transition duration-300 mx-auto">
         <h1 class="font-black text-black-600 text-3xl md:text-4xl lg:text-5xl uppercase lg:text-center mb-2 pb-3 lg:pb-5 border-b-2">{{ $monster_name }}</h1>
@@ -11,7 +11,7 @@
             <li><span class="font-semibold">Alignment:</span> {{ $alignment }}</li>
             <li><span class="font-semibold">Challenge Rating:</span> {{ $challenge_rating }}</li>
             <li><span class="font-semibold">Armour Class:</span> {{ $armour_class }}</li>
-            <li><span class="font-semibold">Description:</span> {!! $description !!}</li>
+            <li><span class="font-semibold">Description:</span> {!! nl2br($description) !!}</li>
             <li class="border-t border-b py-2">Stats here (Placeholder)</li>
         </ul>
         <div class="flex gap-2 mt-4">

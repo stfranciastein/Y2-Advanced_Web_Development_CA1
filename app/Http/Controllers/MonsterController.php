@@ -128,10 +128,11 @@ class MonsterController extends Controller
             'challenge_rating' => 'required|integer',
             'armour_class' => 'required|integer',
             'image_url' => 'sometimes|image', // Use 'sometimes' if the image isn't required to be updated
+            'description' => 'nullable|string', // Add validation for description if it's required
         ]);
     
         //Hi Matthew, here's the edited stuff.
-        $data = $request->only(['monster_name', 'alignment', 'challenge_rating', 'armour_class']);
+        $data = $request->only(['monster_name', 'alignment', 'challenge_rating', 'armour_class', 'description']);
         
         if ($request->hasFile('image_url')) {
             if ($monster->image_url && file_exists(public_path($monster->image_url))) {
