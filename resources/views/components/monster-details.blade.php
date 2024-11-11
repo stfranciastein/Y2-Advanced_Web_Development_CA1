@@ -11,16 +11,10 @@
             <li><span class="font-semibold">Alignment:</span> {{ $alignment }}</li>
             <li><span class="font-semibold">Challenge Rating:</span> {{ $challenge_rating }}</li>
             <li><span class="font-semibold">Armour Class:</span> {{ $armour_class }}</li>
-            <li><span class="font-semibold">Description:</span> {{ $description }}</li>
+            <li><span class="font-semibold">Description:</span> {!! $description !!}</li>
             <li class="border-t border-b py-2">Stats here (Placeholder)</li>
         </ul>
         <div class="flex gap-2 mt-4">
-            <a href="{{ route('monsters.edit', $monster_id) }}" class="bg-neutral-600 text-white text-sm uppercase py-2 px-4 rounded-md hover:bg-neutral-700 transition duration-200">Edit</a>
-            <form action="{{ route('monsters.destroy', $monster_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this monster?');">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="bg-red-500 text-white uppercase text-sm py-2 px-4 rounded-md hover:bg-red-600 transition duration-200">Delete</button>
-            </form>
             <div class="text-white bg-rose-500 text-sm rounded hover:bg-rose-600">
                 <form action="{{ route('monsters.favourite', $monster_id) }}" method="POST">
                     @csrf
@@ -41,6 +35,14 @@
                     @endif
                 </form>
             </div>
+            @if (auth()->check() && auth()->user()->role === 'admin')
+            <a href="{{ route('monsters.edit', $monster_id) }}" class="bg-green-500 text-white text-sm uppercase py-2 px-4 rounded-md hover:bg-green-600 transition duration-200">Edit</a>
+            <form action="{{ route('monsters.destroy', $monster_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this monster?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-red-500 text-white uppercase text-sm py-2 px-4 rounded-md hover:bg-red-600 transition duration-200">Delete</button>
+            </form>
+            @endif
         </div>
     </div>
 </div>
