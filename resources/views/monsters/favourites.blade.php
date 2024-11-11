@@ -4,10 +4,10 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 gap-6">
                 <div class="bg-white overflow-hidden shadow-sm">
                     <div class="p-6 text-gray-900">
-                        <h3 class="font-semibold text-lg mb-4">Your Favourite Monsters</h3>
                         @if($favouriteMonsters->isEmpty())
                             <p class="text-lg">You have no favourite monsters yet.</p>
                         @else
+                            <x-monster-filter-form :route="'monsters.index'" :alignments="$alignments" />
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                 @foreach($favouriteMonsters as $monster)
                                 <a href="{{ route('monsters.show', $monster) }}">

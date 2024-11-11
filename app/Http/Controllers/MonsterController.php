@@ -182,7 +182,9 @@ class MonsterController extends Controller
     public function favourites()
     {
         $favouriteMonsters = auth()->user()->favouriteMonsters;
-        return view('monsters.favourites', compact('favouriteMonsters'));
+        $alignments = Monster::distinct('alignment')->pluck('alignment');
+
+        return view('monsters.favourites', compact('favouriteMonsters', 'alignments'));
     }
 
 
