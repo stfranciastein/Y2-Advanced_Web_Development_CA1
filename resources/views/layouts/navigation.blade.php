@@ -23,10 +23,11 @@
                     <x-nav-link :href="route('monsters.favourites')" :active="request()->routeIs('monsters.favourites')" class="text-white hover:text-rose-500 border-b-0 {{ request()->routeIs('monsters.favourites') ? 'text-rose-500' : '' }}">
                         {{ __('Favourites') }}
                     </x-nav-link>
-
+                    @if (auth()->check() && auth()->user()->role === 'admin')
                     <x-nav-link :href="route('monsters.create')" :active="request()->routeIs('monsters.create')" class="text-white hover:text-rose-500 border-b-0 {{ request()->routeIs('monsters.create') ? 'text-rose-500' : '' }}">
                         {{ __('Add Entry') }}
                     </x-nav-link>
+                    @endif
 
                 </div>
 
@@ -90,9 +91,12 @@
             <x-responsive-nav-link :href="route('monsters.favourites')" :active="request()->routeIs('monsters.favourites')">
                 {{ __('Favourites') }}
             </x-responsive-nav-link>
+            @if (auth()->check() && auth()->user()->role === 'admin')
             <x-responsive-nav-link :href="route('monsters.create')" :active="request()->routeIs('monsters.create')">
                 {{ __('Add Entry') }}
             </x-responsive-nav-link>
+            @endif
+
         </div>
 
         <!-- Responsive Settings Options -->

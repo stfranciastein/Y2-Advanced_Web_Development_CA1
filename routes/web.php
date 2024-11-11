@@ -19,14 +19,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Routes for showing the monsters on page
     Route::get('/dashboard', [MonsterController::class, 'index'])->name('dashboard')->defaults('dashboard', true); //Allows the monsters to also display on dashboard
-    Route::get('/monsters', [MonsterController::class, 'index'])->name('monsters.index');    
+    Route::get('/monsters', [MonsterController::class, 'index'])->name('monsters.index');
+ 
     // Routes for the CRUD functionality of monsters   
-    Route::get('/monsters/create', [MonsterController::class, 'create'])->name('monsters.create');
-    Route::get('/monsters/{monster}', [MonsterController::class, 'show'])->name('monsters.show');
-    Route::post('/monsters', [MonsterController::class, 'store'])->name('monsters.store');
-    Route::get('/monsters/{monster}/edit', [MonsterController::class, 'edit'])->name('monsters.edit');
-    Route::patch('/monsters/{monster}', [MonsterController::class, 'update'])->name('monsters.update');
-    Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy');
+    Route::get('/monsters/create', [MonsterController::class, 'create'])->name('monsters.create')->middleware('admin');
+    Route::get('/monsters/{monster}', [MonsterController::class, 'show'])->name('monsters.show'); //Show needs to be below create, otherwise it will result in create giving a 404.
+    Route::post('/monsters', [MonsterController::class, 'store'])->name('monsters.store')->middleware('admin');
+    Route::get('/monsters/{monster}/edit', [MonsterController::class, 'edit'])->name('monsters.edit')->middleware('admin');
+    Route::patch('/monsters/{monster}', [MonsterController::class, 'update'])->name('monsters.update')->middleware('admin');
+    Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy')->middleware('admin');
     // Routes for favourites
     Route::post('/monsters/{monster}/favourite', [MonsterController::class, 'favourite'])->name('monsters.favourite');
     Route::get('/favourites', [MonsterController::class, 'favourites'])->name('monsters.favourites');
